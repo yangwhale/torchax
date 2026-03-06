@@ -1046,11 +1046,11 @@ def _aten_bucketize(input, boundaries, *, out_int32=False, right=False, out=None
 def _aten_conv2d(
   input,
   weight,
-  bias,
-  stride,
-  padding,
-  dilation,
-  groups,
+  bias=None,
+  stride=(1, 1),
+  padding=(0, 0),
+  dilation=(1, 1),
+  groups=1,
 ):
   return _aten_convolution(
     input,

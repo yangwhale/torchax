@@ -41,6 +41,10 @@ def extract_all_buffers(m: torch.nn.Module):
 
   def extract_one(module, prefix):
     for k in dir(module):
+      # Skip properties — they delegate to another attribute and may not
+      # have a setter, which causes _reparametrize_module to fail.
+      if isinstance(getattr(type(module), k, None), property):
+        continue
       try:
         v = getattr(module, k)
       except Exception:
